@@ -171,7 +171,7 @@ public class CadastroVeiculos extends JFrame {
 
         voltar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                Menu menu = new Menu();
+                Veiculos veiculos = new Veiculos();
                 
                 dispose();
             }
