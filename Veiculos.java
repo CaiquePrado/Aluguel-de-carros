@@ -66,7 +66,7 @@ public class Veiculos extends JFrame {
             }
         });
 
-        cadastrar_veiculo.setText("Cadastrar novo carro");
+        cadastrar_veiculo.setText("Cadastrar novo veículo");
         cadastrar_veiculo.setBounds(260,300,200,30);
         cadastrar_veiculo.setFont(f);
         cadastrar_veiculo.setForeground(Color.white);
