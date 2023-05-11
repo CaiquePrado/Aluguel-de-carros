@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CadastroClientes extends JFrame {
 
@@ -149,6 +151,17 @@ public class CadastroClientes extends JFrame {
         registrar.setBackground(Color.GRAY);
         add(registrar);
 
+        registrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+
+                JOptionPane.showMessageDialog(CadastroClientes.this, "Cliente Registrado!");
+
+                Clientes clientes = new Clientes();
+                
+                dispose();
+            }
+        });
+
         voltar.setText("Voltar");
         voltar.setBounds(165,330,120,30);
         voltar.setFont(f);
@@ -156,6 +169,13 @@ public class CadastroClientes extends JFrame {
         voltar.setBackground(Color.gray);
         add(voltar);
 
+        voltar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                Clientes clientes = new Clientes();
+                
+                dispose();
+            }
+        });
 
         
     }

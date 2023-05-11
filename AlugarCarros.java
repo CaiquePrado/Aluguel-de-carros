@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class AlugarCarros extends JFrame {
 
@@ -133,6 +136,15 @@ public class AlugarCarros extends JFrame {
         registrar.setFont(f);
         registrar.setForeground(Color.white);
         registrar.setBackground(Color.GRAY);
+        
+        registrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                JOptionPane.showMessageDialog(AlugarCarros.this, "Aluguel Registrado!");
+                
+                dispose();
+            }
+        });
+
         add(registrar);
 
         voltar.setText("Voltar");
@@ -140,10 +152,23 @@ public class AlugarCarros extends JFrame {
         voltar.setFont(f);
         voltar.setForeground(Color.white);
         voltar.setBackground(Color.gray);
-        add(voltar);
-
-
         
+
+        voltar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                Menu menu1 = new Menu();
+                
+                dispose();
+            }
+        });
+
+        add(voltar);
+        
+    }
+
+    public void Botao_voltar(){
+    
+
     }
 
     public static void main(String[] args) {
@@ -151,3 +176,6 @@ public class AlugarCarros extends JFrame {
         
     }
 }
+
+
+    

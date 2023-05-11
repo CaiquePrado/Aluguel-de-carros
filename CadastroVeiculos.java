@@ -1,5 +1,7 @@
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CadastroVeiculos extends JFrame {
 
@@ -149,12 +151,31 @@ public class CadastroVeiculos extends JFrame {
         registrar.setBackground(Color.GRAY);
         add(registrar);
 
+        registrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+
+                JOptionPane.showMessageDialog(CadastroVeiculos.this, "Veículo Registrado!");
+
+                Veiculos veiculos = new Veiculos();
+                
+                dispose();
+            }
+        });
+
         voltar.setText("Voltar");
         voltar.setBounds(165,330,120,30);
         voltar.setFont(f);
         voltar.setForeground(Color.white);
         voltar.setBackground(Color.gray);
         add(voltar);
+
+        voltar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                Menu menu = new Menu();
+                
+                dispose();
+            }
+        });
 
         
     }

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Veiculos extends JFrame {
 
@@ -11,6 +13,10 @@ public class Veiculos extends JFrame {
     private JLabel subtitulo = new JLabel();
     private JLabel logo = new JLabel();
     private JLabel logoDois = new JLabel();
+
+    private JButton voltar = new JButton();
+    private JButton cadastrar_veiculo = new JButton();
+    
 
     public Veiculos(){
 
@@ -44,6 +50,36 @@ public class Veiculos extends JFrame {
         titulo.setFont(tituloFont);
         titulo.setForeground(Color.GRAY);
         add(titulo);
+
+        voltar.setText("Voltar");
+        voltar.setBounds(125,300,120,30);
+        voltar.setFont(f);
+        voltar.setForeground(Color.white);
+        voltar.setBackground(Color.gray);
+        add(voltar);
+
+        voltar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                Menu menu = new Menu();
+                
+                dispose();
+            }
+        });
+
+        cadastrar_veiculo.setText("Cadastrar novo carro");
+        cadastrar_veiculo.setBounds(260,300,200,30);
+        cadastrar_veiculo.setFont(f);
+        cadastrar_veiculo.setForeground(Color.white);
+        cadastrar_veiculo.setBackground(Color.gray);
+        add(cadastrar_veiculo);
+
+        cadastrar_veiculo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                CadastroVeiculos cadastroVeiculos = new CadastroVeiculos();
+                
+                dispose();
+            }
+        });
 
     }
     

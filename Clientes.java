@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Clientes extends JFrame {
 
@@ -11,6 +13,9 @@ public class Clientes extends JFrame {
     private JLabel subtitulo = new JLabel();
     private JLabel logo = new JLabel();
     private JLabel logoDois = new JLabel();
+
+    private JButton voltar = new JButton();
+    private JButton cadastrar_cliente = new JButton();
 
     public Clientes(){
 
@@ -44,6 +49,36 @@ public class Clientes extends JFrame {
         titulo.setFont(tituloFont);
         titulo.setForeground(Color.GRAY);
         add(titulo);
+
+        voltar.setText("Voltar");
+        voltar.setBounds(125,300,120,30);
+        voltar.setFont(f);
+        voltar.setForeground(Color.white);
+        voltar.setBackground(Color.gray);
+        add(voltar);
+
+        voltar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                Menu menu = new Menu();
+                
+                dispose();
+            }
+        });
+
+       cadastrar_cliente.setText("Cadastrar novo cliente");
+       cadastrar_cliente.setBounds(260,300,200,30);
+       cadastrar_cliente.setFont(f);
+       cadastrar_cliente.setForeground(Color.white);
+       cadastrar_cliente.setBackground(Color.gray);
+       add(cadastrar_cliente);
+
+       cadastrar_cliente.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                CadastroClientes cadastroClientes = new CadastroClientes();
+                
+                dispose();
+            }
+        });
 
     }
     
