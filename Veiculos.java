@@ -1,25 +1,29 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent;  // IMPORTAÇÕES NECESSÁRIAS
 import java.awt.event.ActionListener;
 
 public class Veiculos extends JFrame {
 
+    // FONTES
     private Font f = new Font("Poppins",Font.BOLD,15);
     private Font tituloFont = new Font("Poppins",Font.BOLD,15);
     private Font logoFont = new Font("Poppins",Font.BOLD,35);
 
+    // TITULOS, SUBTITULO E LOGO
     private JLabel titulo = new JLabel();
     private JLabel subtitulo = new JLabel();
     private JLabel logo = new JLabel();
     private JLabel logoDois = new JLabel();
 
+    // BOTÕES
     private JButton voltar = new JButton();
     private JButton cadastrar_veiculo = new JButton();
     
-
+    // CONSTRUTOR
     public Veiculos(){
 
+        // JFRAME
         setTitle("SiCars - Aluguel de Carros");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,6 +32,7 @@ public class Veiculos extends JFrame {
         setLayout(null);
         setVisible(true);
 
+        // LOGOS, SUBTITULOS E TITULOS
         logo.setText("Si");
         logoDois.setText("Cars");
         logo.setBounds(425,10,250,30);
@@ -51,13 +56,14 @@ public class Veiculos extends JFrame {
         titulo.setForeground(Color.GRAY);
         add(titulo);
 
+        // BOTÃO VOLTAR
         voltar.setText("Voltar");
         voltar.setBounds(125,300,120,30);
         voltar.setFont(f);
         voltar.setForeground(Color.white);
         voltar.setBackground(Color.gray);
         add(voltar);
-
+        // AÇÃO 
         voltar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 Menu menu = new Menu();
@@ -66,13 +72,14 @@ public class Veiculos extends JFrame {
             }
         });
 
+        // BOTÃO CADASTRAR VEICULO
         cadastrar_veiculo.setText("Cadastrar novo veículo");
         cadastrar_veiculo.setBounds(260,300,200,30);
         cadastrar_veiculo.setFont(f);
         cadastrar_veiculo.setForeground(Color.white);
         cadastrar_veiculo.setBackground(Color.gray);
         add(cadastrar_veiculo);
-
+        // AÇÃO
         cadastrar_veiculo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 CadastroVeiculos cadastroVeiculos = new CadastroVeiculos();

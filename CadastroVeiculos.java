@@ -1,19 +1,22 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent;  // IMPORTAÇÕES NECESSÁRIAS //
 import java.awt.event.ActionListener;
 
 public class CadastroVeiculos extends JFrame {
 
+    // FONTES
     private Font f = new Font("Poppins",Font.BOLD,10);
-    private Font tituloFont = new Font("Poppins",Font.BOLD,15);
+    private Font tituloFont = new Font("Poppins",Font.BOLD,15);  
     private Font logoFont = new Font("Poppins",Font.BOLD,35);
 
+    // TITULOS, SUBTITULOS E LOGO
     private JLabel titulo = new JLabel();
     private JLabel subtitulo = new JLabel();
     private JLabel logo = new JLabel();
     private JLabel logoDois = new JLabel();
 
+    // CAMPOS E PRÉ CAMPOS
     private JTextField fabricante = new JTextField();
     private JLabel fabricante_text = new JLabel();
     private JTextField modelo = new JTextField();
@@ -29,11 +32,14 @@ public class CadastroVeiculos extends JFrame {
     private JTextField situacao = new JTextField();
     private JLabel situacao_text = new JLabel();
 
+    // BOTÕES
     private JButton registrar = new JButton();
     private JButton voltar = new JButton();
 
-
+    // CONSTRUTOR 
     public CadastroVeiculos(){
+
+        // JFRAME
         setTitle("SiCars - Aluguel de Carros");
         setSize(600, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +48,7 @@ public class CadastroVeiculos extends JFrame {
         setLayout(null);
         setVisible(true);
 
-
+        // SUBTITULOS E LOGOS
         subtitulo.setText("CADASTRO DE VEÍCULOS");
         subtitulo.setBounds(20,10,350,30);
         subtitulo.setFont(new java.awt.Font("Bahnscrift",1, 12));
@@ -66,7 +72,7 @@ public class CadastroVeiculos extends JFrame {
         add(logo);
         add(logoDois);
 
-
+        // CAMPOS E TEXTOS PRÉ CAMPOS
         fabricante_text.setBounds(50, 90,150,25);
         fabricante_text.setText("Fabricante: ");
         fabricante_text.setFont(new java.awt.Font("Banhscrift", 1, 12));
@@ -143,14 +149,14 @@ public class CadastroVeiculos extends JFrame {
         situacao.setForeground(Color.darkGray);
         add(situacao);
 
-
+        // BOTÃO REGISTRAR
         registrar.setText("Cadastrar Veículo");
         registrar.setBounds(300,330,130,30);
         registrar.setFont(f);
         registrar.setForeground(Color.white);
         registrar.setBackground(Color.GRAY);
         add(registrar);
-
+        // AÇÃO DO BOTÃO
         registrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
 
@@ -162,13 +168,14 @@ public class CadastroVeiculos extends JFrame {
             }
         });
 
+        // BOTÃO VOLTAR
         voltar.setText("Voltar");
         voltar.setBounds(165,330,120,30);
         voltar.setFont(f);
         voltar.setForeground(Color.white);
         voltar.setBackground(Color.gray);
         add(voltar);
-
+        // AÇÃO DO BOTÃO
         voltar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 Veiculos veiculos = new Veiculos();

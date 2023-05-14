@@ -1,19 +1,24 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.*;                      // IMPORTAÇÕES NECESSÁRIAS //    
+import java.awt.Font;            // JAVA SWING, JAVA.AWT CORES, FONTES E EVENTOS //
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class CadastroClientes extends JFrame {
 
+            // INSTANCIANDO AS FONTES DAS LOGOS E TEXTOS //
     private Font f = new Font("Poppins",Font.BOLD,10);
     private Font tituloFont = new Font("Poppins",Font.BOLD,15);
     private Font logoFont = new Font("Poppins",Font.BOLD,35);
 
+            // INSTANCIANDO UMA JLABEL PARA POR OS TITULOS E TEXTOS //
     private JLabel titulo = new JLabel();
     private JLabel subtitulo = new JLabel();
     private JLabel logo = new JLabel();
     private JLabel logoDois = new JLabel();
 
+            // INSTANCIANDO OS CAMPOS E TEXTOS DE CADA ENTRADA DA INTERFACE //
     private JTextField nome = new JTextField();
     private JLabel nome_text = new JLabel();
     private JTextField cpf = new JTextField();
@@ -29,33 +34,37 @@ public class CadastroClientes extends JFrame {
     private JTextField telefone = new JTextField();
     private JLabel telefone_text = new JLabel();
 
+            // INSTANCIANDO OS BOTÕES //
     private JButton registrar = new JButton();
     private JButton voltar = new JButton();
 
-
+            // CONSTRUTOR DA CLASSE CadastroClientes // 
     public CadastroClientes(){
 
+        // CONFIGURANDO A JANELA JFRAME //
         setTitle("SiCars - Aluguel de Carros");
-        setSize(600, 450);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setLayout(null);
-        setVisible(true);
+        setSize(600, 450); // TAMANHO DA JANELA //
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // OPERAÇÃO PARA QUANDO APERTAR EM FECHAR //
+        setResizable(false); // NÃO REDIMENSIONAR //
+        setLocationRelativeTo(null); // APARECER NO MEIO DA TELA //
+        setLayout(null); // SEM GERENCIADOR DE LAYOUT //
+        setVisible(true); // VISIBILIDADE // 
 
-        
+        // CONFIGURAÇÃO DO SUBTITULO //
         subtitulo.setText("CADASTRO DE CLIENTES");
         subtitulo.setBounds(20,10,350,30);
         subtitulo.setFont(new java.awt.Font("Bahnscrift",1, 12));
         subtitulo.setForeground(Color.GRAY);
         add(subtitulo);
 
+        //CONFIGURAÇÃO DO TITULO // 
         titulo.setText("Informe os dados do cliente a ser cadastrado");
         titulo.setBounds(20,40,350,30);
         titulo.setFont(tituloFont);
         titulo.setForeground(Color.GRAY);
         add(titulo);
 
+        //CONFIGURAÇÃO DA LOGO//
         logo.setText("Si");
         logoDois.setText("Cars");
         logo.setBounds(425,10,250,30);
@@ -67,12 +76,14 @@ public class CadastroClientes extends JFrame {
         add(logo);
         add(logoDois);
 
+        // CONFIGURAÇÃO DO TEXTO ANTES DO CAMPO //
         nome_text.setBounds(50, 90,150,25);
         nome_text.setText("Nome: ");
         nome_text.setFont(new java.awt.Font("Banhscrift", 1, 12));
         nome_text.setForeground(Color.darkGray);
         add(nome_text);
 
+        // CONFIGURAÇÃO DO CAMPO //
         nome.setBounds(120, 90, 150, 25);
         nome.setForeground(Color.darkGray);
         add(nome);
@@ -143,7 +154,7 @@ public class CadastroClientes extends JFrame {
         telefone.setForeground(Color.darkGray);
         add(telefone);
 
-
+        // CONFIGURAÇÃO NOTÃO REGISTRAR // 
         registrar.setText("Cadastrar cliente");
         registrar.setBounds(300,330,130,30);
         registrar.setFont(f);
@@ -151,24 +162,26 @@ public class CadastroClientes extends JFrame {
         registrar.setBackground(Color.GRAY);
         add(registrar);
 
+        // ADICIONANDO AÇÃO AO BOTÃO //
         registrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
 
                 JOptionPane.showMessageDialog(CadastroClientes.this, "Cliente Registrado!");
 
-                Clientes clientes = new Clientes();
+                Clientes clientes = new Clientes(); // VOLTAR PARA CLIENTES //
                 
-                dispose();
+                dispose(); // FECHAR JANELA // 
             }
         });
 
+        // CONFIGURAÇÃO BOTÃO VOLTAR //
         voltar.setText("Voltar");
         voltar.setBounds(165,330,120,30);
         voltar.setFont(f);
         voltar.setForeground(Color.white);
         voltar.setBackground(Color.gray);
         add(voltar);
-
+        // AÇÃO DO BOTÃO VOLTAR //
         voltar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 Clientes clientes = new Clientes();
