@@ -3,6 +3,8 @@ import java.awt.Font;            // JAVA SWING, JAVA.AWT CORES, FONTES E EVENTOS
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 
@@ -43,11 +45,18 @@ public class AlugarCarros extends JFrame {
         // CONFIGURANDO A JANELA JFRAME //
         setTitle("SiCars - Aluguel de Carros"); // TITULO DA JANELA // 
         setSize(600, 450); // TAMANHO DA JANELA //
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // OPERAÇÃO PARA QUANDO APERTAR EM FECHAR //
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // OPERAÇÃO PARA QUANDO APERTAR EM FECHAR //
         setResizable(false); // NÃO REDIMENSIONAR //
         setLocationRelativeTo(null); // APARECER NO MEIO DA TELA //
         setLayout(null); // SEM GERENCIADOR DE LAYOUT // 
         setVisible(true); // VISIBILIDADE // 
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                // Ao fechar a janela principal, cria e exibe uma nova janela JFrame
+                Veiculos veiculos = new Veiculos();
+            }
+        });
 
         
         // CONFIGURAÇÃO DO SUBTITULO // 

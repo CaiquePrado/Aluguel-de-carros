@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;  // IMPORTAÇÕES NECESSÁRIAS //
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class CadastroVeiculos extends JFrame {
 
@@ -42,11 +44,18 @@ public class CadastroVeiculos extends JFrame {
         // JFRAME
         setTitle("SiCars - Aluguel de Carros");
         setSize(600, 450);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
         setLayout(null);
         setVisible(true);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                // Ao fechar a janela principal, cria e exibe uma nova janela JFrame
+                Veiculos veiculos = new Veiculos();
+            }
+        });
 
         // SUBTITULOS E LOGOS
         subtitulo.setText("CADASTRO DE VEÍCULOS");
@@ -159,7 +168,7 @@ public class CadastroVeiculos extends JFrame {
         // AÇÃO DO BOTÃO
         registrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-
+                
                 JOptionPane.showMessageDialog(CadastroVeiculos.this, "Veículo Registrado!");
 
                 Veiculos veiculos = new Veiculos();

@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;  // IMPORTAÇÕES NECESSÁRIAS
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Clientes extends JFrame {
     // FONTES
@@ -25,11 +27,18 @@ public class Clientes extends JFrame {
         // JFRAME
         setTitle("SiCars - Aluguel de Carros");
         setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
         setLayout(null);
         setVisible(true);
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                // Ao fechar a janela principal, cria e exibe uma nova janela JFrame
+                Menu menu = new Menu();
+            }
+        });
 
         // LOGOS, SUB TITULOS E TITULOS
         logo.setText("Si");
