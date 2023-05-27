@@ -40,6 +40,8 @@ public class CadastroClientesInterface extends JFrame {
     private JButton registrar = new JButton();
     private JButton voltar = new JButton();
 
+    public boolean atualizar = false;
+
             // CONSTRUTOR DA CLASSE CadastroClientes // 
     public CadastroClientesInterface(){
 
@@ -177,12 +179,18 @@ public class CadastroClientesInterface extends JFrame {
         // ADICIONANDO AÇÃO AO BOTÃO //
         registrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                cadastrarCliente();
-                dispose();
-                JOptionPane.showMessageDialog(null, "AGUARDE... ESTAMOS CARREGANDO OS DADOS.");
+
+                if(atualizar == true){
+                    
+                    atualizarCliente();
+                }else{
+                    cadastrarCliente();
+                }
 
                 ClientesTableInterface clientesTableInterface = new ClientesTableInterface();
                 
+                
+                dispose();
             }
         });
 
@@ -206,6 +214,21 @@ public class CadastroClientesInterface extends JFrame {
         
     }
 
+    private void atualizarCliente() {
+        Cliente cliente = new Cliente();
+        cliente.setNome(nome.getText());
+        cliente.setCpf(cpf.getText());
+        cliente.setCnh(cnh.getText());
+        cliente.setEndereco(endereco.getText());
+        cliente.setBairro(bairro.getText());
+        cliente.setCep(cep.getText());
+        cliente.setTelefone(telefone.getText());
+
+        ClienteDAO.atualizarCliente(cliente);
+        //JOptionPane.showMessageDialog(this, "Veículo cadastrado com sucesso!");
+
+    }
+
     private void cadastrarCliente() {
         Cliente cliente = new Cliente();
         cliente.setNome(nome.getText());
@@ -215,12 +238,20 @@ public class CadastroClientesInterface extends JFrame {
         cliente.setBairro(bairro.getText());
         cliente.setCep(cep.getText());
         cliente.setTelefone(telefone.getText());
-        
-
         ClienteDAO.cadastrarCliente(cliente);
-        
-
     
+    }
+
+    public void preencherCampos(Cliente cliente) {
+
+        // Atribua os valores do veículo aos campos da interface
+        nome.setText(cliente.getNome());
+        cpf.setText(cliente.getCpf());
+        cnh.setText(cliente.getCnh());
+        endereco.setText(cliente.getEndereco());
+        bairro.setText(cliente.getBairro());
+        cep.setText(cliente.getCep());
+        telefone.setText(cliente.getTelefone());
     }
 
     public static void main(String[] args) {

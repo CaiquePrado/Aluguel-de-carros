@@ -33,6 +33,7 @@ public class VeiculosTableInterface extends JFrame {
         tableModel.addColumn("MODELO");
         tableModel.addColumn("COR");
         tableModel.addColumn("PLACA");
+        tableModel.addColumn("CHASSI");
         tableModel.addColumn("SITUAÇÃO");
         tableModel.addColumn("ANO DE FABRICAÇÃO");
 
@@ -76,10 +77,11 @@ public class VeiculosTableInterface extends JFrame {
                 String modelo = resultSet.getString("modelo");
                 String cor = resultSet.getString("cor");
                 String placa = resultSet.getString("placa");
+                String chassi = resultSet.getString("chassi");
                 String situacao = resultSet.getString("situacao");
                 int anoFabricacao = resultSet.getInt("anoFabricacao");
 
-                Object[] rowData = {fabricante, modelo, cor, placa, situacao, anoFabricacao};
+                Object[] rowData = {fabricante, modelo, cor, placa, chassi, situacao, anoFabricacao};
                 tableModel.addRow(rowData);
             }
 
