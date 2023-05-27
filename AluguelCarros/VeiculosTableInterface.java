@@ -1,14 +1,16 @@
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.awt.event.*;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 public class VeiculosTableInterface extends JFrame {
     private JTable veiculosTable;
@@ -33,6 +35,7 @@ public class VeiculosTableInterface extends JFrame {
         tableModel.addColumn("MODELO");
         tableModel.addColumn("COR");
         tableModel.addColumn("PLACA");
+        tableModel.addColumn("CHASSI");
         tableModel.addColumn("SITUAÇÃO");
         tableModel.addColumn("ANO DE FABRICAÇÃO");
 
@@ -76,10 +79,11 @@ public class VeiculosTableInterface extends JFrame {
                 String modelo = resultSet.getString("modelo");
                 String cor = resultSet.getString("cor");
                 String placa = resultSet.getString("placa");
+                String chassi = resultSet.getString("chassi");
                 String situacao = resultSet.getString("situacao");
                 int anoFabricacao = resultSet.getInt("anoFabricacao");
 
-                Object[] rowData = {fabricante, modelo, cor, placa, situacao, anoFabricacao};
+                Object[] rowData = {fabricante, modelo, cor, placa, chassi, situacao, anoFabricacao};
                 tableModel.addRow(rowData);
             }
 

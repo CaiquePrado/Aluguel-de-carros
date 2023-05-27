@@ -1,10 +1,12 @@
-import javax.swing.*;
-
-import TelasExcluidas.ClientesInterface;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;  // IMPORTAÇÕES NECESSÁRIAS
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class MenuInterface extends JFrame{
 
@@ -29,6 +31,8 @@ public class MenuInterface extends JFrame{
     private JButton alugueis = new JButton();
     private JButton alugar = new JButton();
     private JButton editarAluguel = new JButton();
+
+    
 
     // CONSTRUTOR
     public MenuInterface(){
@@ -109,9 +113,13 @@ public class MenuInterface extends JFrame{
         // AÇÃO
         editarveiculo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                dispose();
-                CadastroClientesInterface cadastroClientes = new CadastroClientesInterface();
-                
+                String placa = JOptionPane.showInputDialog(null, "Informe a placa do veículo a ser editado:", "Editar Veículo", JOptionPane.QUESTION_MESSAGE);
+                VeiculoDAO veiculoDAO = new VeiculoDAO();
+                Veiculo veiculo = veiculoDAO.buscarPorPlaca(placa);
+                CadastroVeiculosInterface cadastroVeiculos = new CadastroVeiculosInterface();
+                cadastroVeiculos.atualizar = true;
+                cadastroVeiculos.preencherCampos(veiculo);
+
             }
         });
 
@@ -157,8 +165,12 @@ public class MenuInterface extends JFrame{
         // AÇÃO
         editarcliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                dispose();
+                String cpf = JOptionPane.showInputDialog(null, "Informe o CPF do cliente a ser editado:", "Editar Cliente", JOptionPane.QUESTION_MESSAGE);
+                ClienteDAO clienteDAO = new ClienteDAO();
+                Cliente cliente = clienteDAO.buscarPorCpf(cpf);
                 CadastroClientesInterface cadastroClientes = new CadastroClientesInterface();
+                cadastroClientes.atualizar = true;
+                cadastroClientes.preencherCampos(cliente);
                 
             }
         });

@@ -1,12 +1,16 @@
-import javax.swing.*;
-
-import TelasExcluidas.VeiculosInterace;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;  // IMPORTAÇÕES NECESSÁRIAS //
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 
 public class CadastroVeiculosInterface extends JFrame {
 
@@ -42,6 +46,8 @@ public class CadastroVeiculosInterface extends JFrame {
     // BOTÕES
     private JButton registrar = new JButton();
     private JButton voltar = new JButton();
+
+    public boolean atualizar = false;
 
     // CONSTRUTOR 
     public CadastroVeiculosInterface(){
@@ -190,7 +196,13 @@ public class CadastroVeiculosInterface extends JFrame {
         registrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
 
-                cadastrarVeiculo();
+                if(atualizar == true){
+                    
+                    atualizarVeiculo();
+                }else{
+                    cadastrarVeiculo();
+                }
+                
                 
                 //JOptionPane.showMessageDialog(CadastroVeiculosInterface.this, "Veículo Registrado!");
 
@@ -210,7 +222,8 @@ public class CadastroVeiculosInterface extends JFrame {
         // AÇÃO DO BOTÃO
         voltar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                VeiculosInterace veiculos = new VeiculosInterace();
+
+                MenuInterface menuInterface = new MenuInterface();
                 
                 dispose();
             }
@@ -219,12 +232,28 @@ public class CadastroVeiculosInterface extends JFrame {
         
     }
 
+    private void atualizarVeiculo() {
+        Veiculo veiculo = new Veiculo();
+        veiculo.setFabricante(fabricante.getText());
+        veiculo.setModelo(modelo.getText());
+        veiculo.setCor(cor.getText());
+        veiculo.setPlaca(placa.getText());
+        veiculo.setChassi(chassi.getText());
+        veiculo.setSituacao(situacao.getText());
+        veiculo.setAnoFabricacao(Integer.parseInt(anoFabricacao.getText()));
+
+        VeiculoDAO.atualizarVeiculo(veiculo);
+        //JOptionPane.showMessageDialog(this, "Veículo cadastrado com sucesso!");
+
+    }
+
     private void cadastrarVeiculo() {
         Veiculo veiculo = new Veiculo();
         veiculo.setFabricante(fabricante.getText());
         veiculo.setModelo(modelo.getText());
         veiculo.setCor(cor.getText());
         veiculo.setPlaca(placa.getText());
+        veiculo.setChassi(chassi.getText());
         veiculo.setSituacao(situacao.getText());
         veiculo.setAnoFabricacao(Integer.parseInt(anoFabricacao.getText()));
 
@@ -233,6 +262,17 @@ public class CadastroVeiculosInterface extends JFrame {
 
     }
 
+    public void preencherCampos(Veiculo veiculo) {
+        // Atribua os valores do veículo aos campos da interface
+        fabricante.setText(veiculo.getFabricante());
+        modelo.setText(veiculo.getModelo());
+        cor.setText(veiculo.getCor());
+        placa.setText(veiculo.getPlaca());
+        chassi.setText(veiculo.getChassi());
+        anoFabricacao.setText(String.valueOf(veiculo.getAnoFabricacao()));
+        situacao.setText(veiculo.getSituacao());
+    }
+    
     public static void main(String[] args) {
         CadastroVeiculosInterface tela1 = new CadastroVeiculosInterface();
         
