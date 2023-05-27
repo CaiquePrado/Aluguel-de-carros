@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import TelasExcluidas.VeiculosInterace;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;  // IMPORTAÇÕES NECESSÁRIAS //
 import java.awt.event.ActionListener;
@@ -33,6 +36,8 @@ public class CadastroVeiculosInterface extends JFrame {
     private JLabel anoFabricacao_text = new JLabel();
     private JTextField situacao = new JTextField();
     private JLabel situacao_text = new JLabel();
+    private JLabel situacao_exemplo = new JLabel();
+    private JLabel ano_exemplo = new JLabel();
 
     // BOTÕES
     private JButton registrar = new JButton();
@@ -52,8 +57,12 @@ public class CadastroVeiculosInterface extends JFrame {
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
+                dispose();
+                JOptionPane.showMessageDialog(null, "AGUARDE... ESTAMOS CARREGANDO OS DADOS.");
                 // Ao fechar a janela principal, cria e exibe uma nova janela JFrame
-                VeiculosInterace veiculos = new VeiculosInterace();
+                VeiculosTableInterface veiculosTableInterface = new VeiculosTableInterface();
+                
+                
             }
         });
 
@@ -147,6 +156,12 @@ public class CadastroVeiculosInterface extends JFrame {
         anoFabricacao.setForeground(Color.darkGray);
         add(anoFabricacao);
 
+        ano_exemplo.setBounds(330, 240, 200,25);
+        ano_exemplo.setText("Ex.: 2008");
+        ano_exemplo.setFont(new java.awt.Font("Banhscrift", 1, 12));
+        ano_exemplo.setForeground(Color.darkGray);
+        add(ano_exemplo);
+
 
         situacao_text.setBounds(50, 270, 150,25);
         situacao_text.setText("Situação do veículo: ");
@@ -158,8 +173,14 @@ public class CadastroVeiculosInterface extends JFrame {
         situacao.setForeground(Color.darkGray);
         add(situacao);
 
+        situacao_exemplo.setBounds(330, 270, 200,25);
+        situacao_exemplo.setText("Ex.: Disponivel/Pendencias");
+        situacao_exemplo.setFont(new java.awt.Font("Banhscrift", 1, 12));
+        situacao_exemplo.setForeground(Color.darkGray);
+        add(situacao_exemplo);
+
         // BOTÃO REGISTRAR
-        registrar.setText("Cadastrar Veículo");
+        registrar.setText("Salvar");
         registrar.setBounds(300,330,130,30);
         registrar.setFont(f);
         registrar.setForeground(Color.white);
@@ -168,10 +189,12 @@ public class CadastroVeiculosInterface extends JFrame {
         // AÇÃO DO BOTÃO
         registrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                
-                JOptionPane.showMessageDialog(CadastroVeiculosInterface.this, "Veículo Registrado!");
 
-                VeiculosInterace veiculos = new VeiculosInterace();
+                cadastrarVeiculo();
+                
+                //JOptionPane.showMessageDialog(CadastroVeiculosInterface.this, "Veículo Registrado!");
+
+                VeiculosTableInterface veiculosTableInterface = new VeiculosTableInterface();
                 
                 dispose();
             }
@@ -194,6 +217,20 @@ public class CadastroVeiculosInterface extends JFrame {
         });
 
         
+    }
+
+    private void cadastrarVeiculo() {
+        Veiculo veiculo = new Veiculo();
+        veiculo.setFabricante(fabricante.getText());
+        veiculo.setModelo(modelo.getText());
+        veiculo.setCor(cor.getText());
+        veiculo.setPlaca(placa.getText());
+        veiculo.setSituacao(situacao.getText());
+        veiculo.setAnoFabricacao(Integer.parseInt(anoFabricacao.getText()));
+
+        VeiculoDAO.cadastrarVeiculo(veiculo);
+        //JOptionPane.showMessageDialog(this, "Veículo cadastrado com sucesso!");
+
     }
 
     public static void main(String[] args) {

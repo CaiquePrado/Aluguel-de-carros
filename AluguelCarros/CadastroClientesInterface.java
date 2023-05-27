@@ -55,8 +55,10 @@ public class CadastroClientesInterface extends JFrame {
         // AÇÃO DO BOTÃO X DA JANELA
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
+                dispose();
+                JOptionPane.showMessageDialog(null, "AGUARDE... ESTAMOS CARREGANDO OS DADOS.");
                 // Ao fechar a janela principal, cria e exibe uma nova janela JFrame
-                ClientesInterface clientes = new ClientesInterface();
+                ClientesTableInterface clientesTableInterface = new ClientesTableInterface();
             }
         });
 
@@ -165,7 +167,7 @@ public class CadastroClientesInterface extends JFrame {
         add(telefone);
 
         // CONFIGURAÇÃO NOTÃO REGISTRAR // 
-        registrar.setText("Cadastrar cliente");
+        registrar.setText("Salvar");
         registrar.setBounds(300,330,130,30);
         registrar.setFont(f);
         registrar.setForeground(Color.white);
@@ -175,12 +177,12 @@ public class CadastroClientesInterface extends JFrame {
         // ADICIONANDO AÇÃO AO BOTÃO //
         registrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
+                cadastrarCliente();
+                dispose();
+                JOptionPane.showMessageDialog(null, "AGUARDE... ESTAMOS CARREGANDO OS DADOS.");
 
-                JOptionPane.showMessageDialog(CadastroClientesInterface.this, "Cliente Registrado!");
-
-                ClientesInterface clientes = new ClientesInterface(); // VOLTAR PARA CLIENTES //
+                ClientesTableInterface clientesTableInterface = new ClientesTableInterface();
                 
-                dispose(); // FECHAR JANELA // 
             }
         });
 
@@ -194,13 +196,31 @@ public class CadastroClientesInterface extends JFrame {
         // AÇÃO DO BOTÃO VOLTAR //
         voltar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                ClientesInterface clientes = new ClientesInterface();
+                
+                MenuInterface menu = new MenuInterface();
                 
                 dispose();
             }
         });
 
         
+    }
+
+    private void cadastrarCliente() {
+        Cliente cliente = new Cliente();
+        cliente.setNome(nome.getText());
+        cliente.setCpf(cpf.getText());
+        cliente.setCnh(cnh.getText());
+        cliente.setEndereco(endereco.getText());
+        cliente.setBairro(bairro.getText());
+        cliente.setCep(cep.getText());
+        cliente.setTelefone(telefone.getText());
+        
+
+        ClienteDAO.cadastrarCliente(cliente);
+        
+
+    
     }
 
     public static void main(String[] args) {

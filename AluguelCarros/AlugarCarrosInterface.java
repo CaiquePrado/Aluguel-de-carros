@@ -1,5 +1,5 @@
 import javax.swing.*;                      // IMPORTAÇÕES NECESSÁRIAS //    
-import java.awt.Font;            // JAVA SWING, JAVA.AWT CORES, FONTES E EVENTOS //
+import java.awt.Font;            // JAVA SWING, JAVA.AWT setPlacaES, FONTES E EVENTOS //
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,8 +24,8 @@ public class AlugarCarrosInterface extends JFrame {
         // INSTANCIANDO OS CAMPOS E TEXTOS DE CADA ENTRADA DA INTERFACE //
     private JTextField nome_cliente = new JTextField();
     private JLabel nome_cliente_text = new JLabel();
-    private JTextField cpf = new JTextField();
-    private JLabel cpf_text = new JLabel();
+    private JTextField cpf_cliente = new JTextField();
+    private JLabel cpf_cliente_text = new JLabel();
     private JTextField placa = new JTextField();
     private JLabel placa_text = new JLabel();
     private JTextField diarias = new JTextField();
@@ -43,7 +43,7 @@ public class AlugarCarrosInterface extends JFrame {
     public AlugarCarrosInterface(){
         
         // CONFIGURANDO A JANELA JFRAME //
-        setTitle("SiCars - Aluguel de Carros"); // TITULO DA JANELA // 
+        setTitle("SiCars - aluguell de Carros"); // TITULO DA JANELA // 
         setSize(600, 450); // TAMANHO DA JANELA //
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // OPERAÇÃO PARA QUANDO APERTAR EM FECHAR //
         setResizable(false); // NÃO REDIMENSIONAR //
@@ -53,8 +53,7 @@ public class AlugarCarrosInterface extends JFrame {
 
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                // Ao fechar a janela principal, cria e exibe uma nova janela JFrame
-                VeiculosInterace veiculos = new VeiculosInterace();
+               MenuInterface menuInterface = new MenuInterface();
             }
         });
 
@@ -67,7 +66,7 @@ public class AlugarCarrosInterface extends JFrame {
         add(subtitulo);
 
         //CONFIGURAÇÃO DO TITULO // 
-        titulo.setText("Informe os dados para realizar o aluguel");
+        titulo.setText("Informe os dados para realizar o aluguell");
         titulo.setBounds(20,40,350,30);
         titulo.setFont(tituloFont);
         titulo.setForeground(Color.GRAY);
@@ -97,17 +96,17 @@ public class AlugarCarrosInterface extends JFrame {
         nome_cliente.setForeground(Color.darkGray);
         add(nome_cliente);
 
-        // CONFIGURAÇÃO DO TEXTO DO CAMPO CPF //
-        cpf_text.setBounds(50, 120, 150, 25);
-        cpf_text.setText("CPF: ");
-        cpf_text.setFont(new java.awt.Font("Banhscrift", 1, 12));
-        cpf_text.setForeground(Color.darkGray);
-        add(cpf_text);
+        // CONFIGURAÇÃO DO TEXTO DO CAMPO cpf_cliente //
+        cpf_cliente_text.setBounds(50, 120, 150, 25);
+        cpf_cliente_text.setText("CPF do cliente: ");
+        cpf_cliente_text.setFont(new java.awt.Font("Banhscrift", 1, 12));
+        cpf_cliente_text.setForeground(Color.darkGray);
+        add(cpf_cliente_text);
 
-        // CONFIGURAÇÃO DO CAMPO CPF //
-        cpf.setBounds(180, 120, 150, 25);
-        cpf.setForeground(Color.darkGray);
-        add(cpf);
+        // CONFIGURAÇÃO DO CAMPO cpf_cliente //
+        cpf_cliente.setBounds(180, 120, 150, 25);
+        cpf_cliente.setForeground(Color.darkGray);
+        add(cpf_cliente);
 
         // CONFIGURAÇÃO DO TEXTO DO CAMPO PLACA // 
         placa_text.setBounds(50, 150, 150, 25);
@@ -123,7 +122,7 @@ public class AlugarCarrosInterface extends JFrame {
 
         // CONFIGURAÇÃO DO TEXTO ANTES DO CAMPO DIARIAS //
         diarias_text.setBounds(50, 180, 150, 25);
-        diarias_text.setText("Endereço: ");
+        diarias_text.setText("Diarias: ");
         diarias_text.setFont(new java.awt.Font("Banhscrift", 1, 12));
         diarias_text.setForeground(Color.darkGray);
         add(diarias_text);
@@ -158,7 +157,7 @@ public class AlugarCarrosInterface extends JFrame {
         add(senha_consultor);
 
         // CONFIGURAÇÃO DO BOTÃO REGISTRAR // 
-        registrar.setText("Realizar aluguel");
+        registrar.setText("Realizar aluguell");
         registrar.setBounds(300,330,130,30);
         registrar.setFont(f);
         registrar.setForeground(Color.white);
@@ -167,9 +166,8 @@ public class AlugarCarrosInterface extends JFrame {
         // ADICIONANDO AÇÃO AO BOTÃO //
         registrar.addActionListener(new ActionListener() { // USA O MÉTODO DA BIBLIOTECA AWT, PASSANDO actionPerformed, //
             public void actionPerformed(ActionEvent e){   // COMO PARÂMETRO.                                           //
-                JOptionPane.showMessageDialog(AlugarCarrosInterface.this, "Aluguel Registrado!"); // POP-UP PARA CONFIRMAR QUE O REGISTRO //
-                                                                                                // FOI SALVO                            //
-                dispose(); // FECHA A JANELA ATUAL // 
+                dispose();
+                alugar();
 
                 MenuInterface menu = new MenuInterface(); // INSTÂNCIA DE MENU, PARA ABRIR COMO NOVA TELA //
             }
@@ -195,7 +193,21 @@ public class AlugarCarrosInterface extends JFrame {
         });
 
         add(voltar);
-        
+
+    }
+
+    private void alugar() {
+        Aluguel aluguel = new Aluguel();
+
+            aluguel.setNome_cliente(nome_cliente.getText());
+            aluguel.setCpf_cliente(cpf_cliente.getText());
+            aluguel.setPlaca(placa.getText());
+            aluguel.setDiarias(Integer.parseInt(diarias.getText()));
+            aluguel.setNome_consultor(nome_consultor.getText());
+            aluguel.setSenha_consultor(senha_consultor.getText());
+    
+            AluguelDAO.alugar(aluguel);
+            JOptionPane.showMessageDialog(this, "Veículo cadastrado com sucesso!");
     }
 
     public static void main(String[] args) {

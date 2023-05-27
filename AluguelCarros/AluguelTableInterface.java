@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -10,14 +11,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.*;
 
-public class VeiculosTableInterface extends JFrame {
-    private JTable veiculosTable;
+public class AluguelTableInterface extends JFrame {
+    private JTable aluguelTable;
     private DefaultTableModel tableModel;
 
-    public VeiculosTableInterface() {
+    public AluguelTableInterface() {
         // Configurações básicas da janela
-        setTitle("Veículos Cadastrados");
-        setSize(600, 500);
+        setTitle("-- ALUGUÉIS --");
+        setSize(800, 600);
         
 
         addWindowListener(new WindowAdapter() {
@@ -27,35 +28,41 @@ public class VeiculosTableInterface extends JFrame {
             }
         });
 
-        // Cria o modelo da tabela
+        // Cria o CPFCLIENTE da tabela
         tableModel = new DefaultTableModel();
-        tableModel.addColumn("FABRICANTE");
-        tableModel.addColumn("MODELO");
-        tableModel.addColumn("COR");
+        tableModel.addColumn("CLIENTE");
+        tableModel.addColumn("CPF CLIENTE");
         tableModel.addColumn("PLACA");
-        tableModel.addColumn("SITUAÇÃO");
-        tableModel.addColumn("ANO DE FABRICAÇÃO");
+        tableModel.addColumn("DIARIAS");
+        tableModel.addColumn("CONSULTOR");
 
-        // Cria a JTable com o modelo
-        veiculosTable = new JTable(tableModel);
+        // Cria a JTable com o CPFCLIENTE
+        aluguelTable = new JTable(tableModel);
+        aluguelTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         // Adiciona a tabela a um JScrollPane para torná-la rolável
-        JScrollPane scrollPane = new JScrollPane(veiculosTable);
+        JScrollPane scrollPane = new JScrollPane(aluguelTable);
         add(scrollPane);
 
         // Preenche a tabela com os dados dos veículos
-        preencherTabelaComVeiculos();
+        preencherTabelaComaluguel();
+
+        
 
         // Ajusta o tamanho das colunas da tabela
         resizeTableColumns();
 
         // Exibe a janela
+    
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+
+        
+        
     }
 
-    private void preencherTabelaComVeiculos() {
+    private void preencherTabelaComaluguel() {
         try {
             // Estabelece a conexão com o banco de dados
             Connection conexao = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/sicars", "dovani", "flamengo");
@@ -64,7 +71,7 @@ public class VeiculosTableInterface extends JFrame {
             Statement statement = conexao.createStatement();
 
             // Executa a consulta SQL para obter os veículos cadastrados
-            String query = "SELECT * FROM Veiculo";
+            String query = "SELECT * FROM Aluguel";
             ResultSet resultSet = statement.executeQuery(query);
 
             // Limpa os dados existentes na tabela
@@ -72,33 +79,35 @@ public class VeiculosTableInterface extends JFrame {
 
             // Itera sobre os resultados e adiciona cada veículo como uma linha na tabela
             while (resultSet.next()) {
-                String fabricante = resultSet.getString("fabricante");
-                String modelo = resultSet.getString("modelo");
-                String cor = resultSet.getString("cor");
-                String placa = resultSet.getString("placa");
-                String situacao = resultSet.getString("situacao");
-                int anoFabricacao = resultSet.getInt("anoFabricacao");
+                String CLIENTE = resultSet.getString("CLIENTE");
+                String CPF_CLIENTE = resultSet.getString("CPF_CLIENTE");
+                String PLACA = resultSet.getString("PLACA");
+                String DIARIAS = resultSet.getString("DIARIAS");
+                String CONSULTOR = resultSet.getString("CONSULTOR");
 
-                Object[] rowData = {fabricante, modelo, cor, placa, situacao, anoFabricacao};
-                tableModel.addRow(rowData);
+                Object[] dados = {CLIENTE, CPF_CLIENTE, PLACA, DIARIAS, CONSULTOR};
+                tableModel.addRow(dados);
             }
 
+    
             // Fecha a conexão e os recursos relacionados
             resultSet.close();
             statement.close();
             conexao.close();
         } catch (SQLException e) {
-            System.out.println("Erro ao preencher a tabela: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao buscar dados dos aluguel!: " + e.getMessage());
         }
     }
 
+    // Percorre a tabela, coluna por coluna e aciona o metodo PreferredWidht, deixando todas com mesmo tamanho
     private void resizeTableColumns() {
-        for (int column = 0; column < veiculosTable.getColumnCount(); column++) {
-            veiculosTable.getColumnModel().getColumn(column).setPreferredWidth(150);
+        for (int column = 0; column < aluguelTable.getColumnCount(); column++) {
+            aluguelTable.getColumnModel().getColumn(column).setPreferredWidth(200);
         }
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(VeiculosTableInterface::new);
+        AluguelTableInterface AluguelTableInterface = new AluguelTableInterface();
+
     }
 }
