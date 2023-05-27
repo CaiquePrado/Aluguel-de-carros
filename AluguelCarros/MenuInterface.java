@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.Font;
+=======
+import javax.swing.*;
+import java.awt.*;
+>>>>>>> 32220438ae049d54cd968ba672002cc32e9dba27
 import java.awt.event.ActionEvent;  // IMPORTAÇÕES NECESSÁRIAS
 import java.awt.event.ActionListener;
 
