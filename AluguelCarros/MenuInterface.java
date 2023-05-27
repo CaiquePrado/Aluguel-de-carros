@@ -1,5 +1,4 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;  // IMPORTAÇÕES NECESSÁRIAS
 import java.awt.event.ActionListener;
