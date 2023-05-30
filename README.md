@@ -12,7 +12,7 @@ Projeto finalizado ✔
 ### 🛠 Tecnologias<a id="tecnologias"></a>
  As seguintes ferramentas foram usadas na construção do projeto:
  
-  - [Java](https://www.java.com/pt-BR/) 
- 
+- [Java](https://www.java.com/pt-BR/) 
+- [MySql](https://www.db4free.net/index.php?language=pt)
   
 
